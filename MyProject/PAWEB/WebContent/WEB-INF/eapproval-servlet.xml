@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+		xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd 
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+	http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd"
+	 xmlns:tx="http://www.springframework.org/schema/tx">
+
+    <util:properties id="propertyconfig" location="classpath:applicationResource.properties"/>
+    <context:property-placeholder properties-ref="propertyconfig" />
+ 
+  	<bean id="internalJspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/JSP/" />
+		<property name="suffix" value=".jsp" />
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+	</bean>
+	
+	
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+		<property name="url" value="${application.database.url}" />
+		<property name="username" value="${application.database.username}" />
+		<property name="password" value="${application.database.password}" />
+		<property name="driverClassName" value="${application.database.driverClassName}" />
+		<property name="initialSize" value="${application.database.initialSize}" />
+		<property name="maxActive" value="${application.database.maxActive}" />	
+		<property name="maxIdle" value="${application.database.maxIdle}" />	
+		<property name="maxWait" value="${application.database.maxWait}" />	
+		<property name="removeAbandoned" value="${application.database.removeAbandoned}" />	
+		<property name="removeAbandonedTimeout" value="${application.database.removeAbandonedTimeout}" />	
+		<property name="logAbandoned" value="true" />			
+		<property name="testWhileIdle" value="true" />			
+		<property name="testOnReturn" value="true" />			
+		<property name="validationQuery" value="select 'X'" />
+		<property name="minEvictableIdleTimeMillis" value="5000" />
+		<property name="timeBetweenEvictionRunsMillis" value="10000" />
+	</bean>
+ 
+ 
+  	 	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		
+<!-- 		  <property name="configLocation">    
+        <value>
+            /WEB-INF/hibernate.cfg.xml
+        </value>
+    </property> -->
+    
+    <property name="dataSource">
+           <ref local="dataSource"/>
+        </property>
+        <property name="packagesToScan">
+    <array>
+       <value>com.pamirs</value>
+    </array>
+    </property>
+		       <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+            <prop key="hibernate.show_sql">true</prop>
+        </props>
+        </property>
+        
+        
+        </bean>
+        
+         
+      <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory"><ref local="sessionFactory"/></property>
+    </bean>
+        
+           <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+        
+ 
+        
+        
+<!-- MVC Annoation Configuration -->
+	
+	    <context:annotation-config/>
+	  
+	  	<!-- Scans the classpath of this application for @Components to deploy as beans -->
+		<context:component-scan base-package="com.pamirs" />
+		 
+		<!-- Configures the @Controller programming model -->
+		<mvc:annotation-driven/>
+		
+	 	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>
+	
+	    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+ 
+ </beans>
+ 

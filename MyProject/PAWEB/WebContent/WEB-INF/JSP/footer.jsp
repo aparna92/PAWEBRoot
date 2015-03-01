@@ -1,0 +1,1 @@
+ <p>Copyright &copy; 2015, designed by Mohammed Ansaruddin Khan </p>
