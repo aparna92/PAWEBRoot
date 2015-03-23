@@ -32,7 +32,7 @@ public class Users implements java.io.Serializable {
 	private String emailId;
 	private String securityQuestion;
 	private String securityAnswer;
- 
+	private Set<SavedHistroy> savedHistroies = new HashSet<SavedHistroy>(0);
 
 	// Constructors
 
@@ -49,8 +49,8 @@ public class Users implements java.io.Serializable {
 	/** full constructor */
 	public Users(RoleMaster roleMaster, String userName, String password,
 			String firstName, String lastName, String emailId,
-			String securityQuestion, String securityAnswer
-			 ) {
+			String securityQuestion, String securityAnswer,
+			Set<SavedHistroy> savedHistroies) {
 		this.roleMaster = roleMaster;
 		this.userName = userName;
 		this.password = password;
@@ -59,7 +59,7 @@ public class Users implements java.io.Serializable {
 		this.emailId = emailId;
 		this.securityQuestion = securityQuestion;
 		this.securityAnswer = securityAnswer;
-	 
+		this.savedHistroies = savedHistroies;
 	}
 
 	// Property accessors
@@ -147,6 +147,13 @@ public class Users implements java.io.Serializable {
 		this.securityAnswer = securityAnswer;
 	}
 
- 
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<SavedHistroy> getSavedHistroies() {
+		return this.savedHistroies;
+	}
+
+	public void setSavedHistroies(Set<SavedHistroy> savedHistroies) {
+		this.savedHistroies = savedHistroies;
+	}
 
 }

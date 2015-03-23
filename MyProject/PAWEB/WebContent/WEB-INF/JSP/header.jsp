@@ -1,5 +1,63 @@
             <script type="text/javascript" src="./js/jquery.blockUI.js" ></script>
+<script>
+
+function submitFunAction(){
+	 
+	var form = document.createElement('form');
+	form.setAttribute('action', 'results.htm');
+	form.setAttribute('method', 'POST');
  
+ 
+
+	var input1 = document.createElement('input');
+	input1.setAttribute('type', 'hidden');
+	input1.setAttribute('name', 'page');
+	input1.setAttribute('id', 'page');
+	input1.setAttribute('value', 'Home');
+
+	var input2 = document.createElement('input');
+	input2.setAttribute('type', 'hidden');
+ 	input2.setAttribute('name', 'searchKey');
+	input2.setAttribute('id', 'searchKey');
+	input2.setAttribute('value', $('#inputField').val());
+	
+	var input3 = document.createElement('input');
+	input3.setAttribute('type', 'hidden');
+	input3.setAttribute('name', 'userId');
+ 	input3.setAttribute('value', $('#userId').val());
+ 
+ 
+
+	form.appendChild(input1);
+	form.appendChild(input2);
+	form.appendChild(input3);
+	 
+	document.body.appendChild(form);
+ 	form.submit();
+	popup();
+}
+function popup(){
+	$.blockUI({ message: $('#ajaxloaderDiv'), css: { width: '450px' } }); 
+}
+
+
+$(document).ready(function() {
+$('#inputField').keypress(function(e) {
+    if (e.which == '13') {
+    	submitFunAction();
+    }
+});
+   
+
+   
+$('#searchForm').submit(function(event){
+
+	  event.preventDefault();
+	});
+	
+});
+</script>
+
 
  
 
@@ -15,7 +73,7 @@
 		<div style="padding-top:26px;">
 		   <form method="post" action="#" id="searchForm">
    <input id="inputField" type="text" value="" name="searchKey" >
-  <input type="button" onClick="javascript:alert('under development')" value="Search" />
+  <input type="button" onClick="submitFunAction()" value="Search" />
   <input type="hidden" name="page" value="Home">
   </form>
   </div>

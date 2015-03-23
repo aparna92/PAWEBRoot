@@ -77,7 +77,19 @@
         
            <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
         
- 
+        	    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${application.mail.host}" />
+        <property name="port" value="${application.mail.smtp.port}" />
+        <property name="username" value="${application.mail.userName}" />
+        <property name="password" value="${application.mail.pwd}" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.transport.protocol">${application.mail.transport.protocol}</prop>
+                <prop key="mail.smtp.auth">${application.mail.smtp.auth}</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
         
         
 <!-- MVC Annoation Configuration -->
