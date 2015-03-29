@@ -121,7 +121,7 @@ public class LoginController {
 			if(us==null)
 				return "Error : Security answer incorrect";
 			else{
-				boolean res = CommonUtil.sendMail(mailSender,fromAddress , us.getEmailId() , "PAMIRS Registration Password", getResetMessage(us.getFirstName(),us.getPassword()));
+				boolean res = CommonUtil.sendMail(mailSender,fromAddress , us.getEmailId() , "PAWEB Registration Password", getResetMessage(us.getFirstName(),us.getPassword()));
 		 
 				return "Success : Password will be sent to registed email";
 			}
