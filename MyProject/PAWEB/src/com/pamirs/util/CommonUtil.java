@@ -211,14 +211,14 @@ public static boolean sendMail(JavaMailSender mailSender,String from,String to,S
 	  
 		 
 		sb.append("<br> ");
-		sb.append("<h1 style='color:#0094ff'>Thank you for Using PAMIRS</h1>");
+		sb.append("<h1 style='color:#0094ff'>Thank you for Using PAWEB</h1>");
 		sb.append("<br> ");
 		sb.append("<br> ");
 		sb.append("<p>This message was sent from a notification-only email address that does not accept incoming email. Please do not reply to this message.</p>");
 		sb.append("<br> ");
 		sb.append("Thanks");
 		sb.append("<br> ");
-		sb.append("PAMIRS.com");
+		sb.append("PAWEB.com");
 		
 		
 		
